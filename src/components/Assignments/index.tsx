@@ -1,23 +1,33 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
-export function Assignments() {
+type Props = {
+  assignmentTitles: string[]
+}
+
+export function Assignments({assignmentTitles}: Props) {
+  const assignments = () => {
+    return assignmentTitles.map(assignment => {
+      return <Assignment key={assignmentTitles.indexOf(assignment)} title={assignment}/>
+    })
+  }
+
   return (
     <section className={styles.assignments}>
       <header className={styles.header}>
         <div>
           <p>Created Assignments</p>
-          <span>1</span>
+          <span>{assignmentTitles.length}</span>
         </div>
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>1 of 1</span>
+          <span>1 of {assignmentTitles.length}</span>
         </div>
       </header>
 
       <div className={styles.list}>
-        <Assignment />
+        {assignments()}
       </div>
     </section>
   );
