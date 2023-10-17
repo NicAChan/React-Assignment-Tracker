@@ -2,10 +2,11 @@ import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
 type Props = {
-  assignments: { title: string, isCompleted: boolean }[]
+  assignments: { id: number, title: string, isCompleted: boolean }[];
+  setAssignments: (assignments: { id: number, title: string, isCompleted: boolean }[]) => void;
 }
 
-export function Assignments({assignments}: Props) {
+export function Assignments({assignments, setAssignments}: Props) {
   let completed = 0
   assignments.forEach(assignment => {
     if (assignment.isCompleted) {
@@ -29,7 +30,14 @@ export function Assignments({assignments}: Props) {
 
       <div className={styles.list}>
         { assignments.map(assignment => (
-            <Assignment key={assignments.indexOf(assignment)} title={assignment.title} isCompleted={assignment.isCompleted}/>
+            <Assignment 
+              key={assignment.id}
+              id={assignment.id}
+              title={assignment.title} 
+              isCompleted={assignment.isCompleted}
+              assignments={assignments}
+              setAssignments={setAssignments}
+            />
         ))}
       </div>
     </section>

@@ -3,12 +3,13 @@ import { Assignments } from "./components/Assignments";
 import { useState } from "react";
 
 function App() {
-  const [assignments, setAssignments] = useState([{ title: "Some Title", isCompleted: false }])
+  const [aId, setAId] = useState(0)
+  const [assignments, setAssignments] = useState([{ id: aId, title: "Some Title", isCompleted: false }])
 
   return (
     <>
-      <Header assignments={assignments} setAssignments={setAssignments}/>
-      <Assignments assignments={assignments}/>
+      <Header assignments={assignments} setAssignments={setAssignments} aId={aId} setAId={setAId}/>
+      <Assignments assignments={assignments} setAssignments={setAssignments}/>
     </>
   );
 }
