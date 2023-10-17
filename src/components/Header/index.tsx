@@ -12,24 +12,25 @@ type Props = {
 
 export function Header({assignments, setAssignments, aId, setAId}: Props) {
   const [isDisabled, setDisabled] = useState(true)
-  const [newAssignment, setNewAssignment] = useState({ id: aId + 1, title: "" })
+  const [userInput, setUserInput] = useState("")
 
   const assignmentInputChange = (e: BaseSyntheticEvent) => {
-    const assignmentInput = e.target.value.trim() 
-
-    if (assignmentInput) {
+    if (e.target.value.trim()) {
       setDisabled(false)
     } else {
       setDisabled(true)
     }
 
-    setNewAssignment({ id: newAssignment.id, title: assignmentInput})
+    setUserInput(e.target.value)
   } 
-
+  
   const createButtonClick = (e: BaseSyntheticEvent) => {
     e.preventDefault()
-    setAssignments([...assignments, newAssignment])
+    setAssignments([...assignments, { id: aId + 1, title: userInput.trim()}])
     setAId(aId + 1)
+
+    setUserInput("")
+    setDisabled(true)
   }
 
   return (
@@ -37,7 +38,7 @@ export function Header({assignments, setAssignments, aId, setAId}: Props) {
       {/* This is simply to show you how to use helper functions */}
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
       <form className={styles.newAssignmentForm}>
-        <input placeholder="Add a new assignment" type="text" onChange={assignmentInputChange}/>
+        <input placeholder="Add a new assignment" type="text" onChange={assignmentInputChange} value={userInput}/>
         <button id="create-button" onClick={createButtonClick}  disabled={isDisabled}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
