@@ -2,10 +2,11 @@ import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
 
 type Props = {
-  title: string
+  title: string;
+  isCompleted: boolean;
 }
 
-export function Assignment({title}: Props) {
+export function Assignment({title, isCompleted}: Props) {
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer}>

@@ -2,32 +2,35 @@ import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
 type Props = {
-  assignmentTitles: string[]
+  assignments: { title: string, isCompleted: boolean }[]
 }
 
-export function Assignments({assignmentTitles}: Props) {
-  const assignments = () => {
-    return assignmentTitles.map(assignment => {
-      return <Assignment key={assignmentTitles.indexOf(assignment)} title={assignment}/>
-    })
-  }
+export function Assignments({assignments}: Props) {
+  let completed = 0
+  assignments.forEach(assignment => {
+    if (assignment.isCompleted) {
+      completed++
+    }
+  })
 
   return (
     <section className={styles.assignments}>
       <header className={styles.header}>
         <div>
           <p>Created Assignments</p>
-          <span>{assignmentTitles.length}</span>
+          <span>{assignments.length}</span>
         </div>
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>1 of {assignmentTitles.length}</span>
+          <span>{completed} of {assignments.length}</span>
         </div>
       </header>
 
       <div className={styles.list}>
-        {assignments()}
+        { assignments.map(assignment => (
+            <Assignment key={assignments.indexOf(assignment)} title={assignment.title} isCompleted={assignment.isCompleted}/>
+        ))}
       </div>
     </section>
   );
