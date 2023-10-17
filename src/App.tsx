@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function App() {
   const [aId, setAId] = useState(0)
-  const [assignments, setAssignments] = useState([{ id: aId, title: "Some Title", isCompleted: false }])
+  const [assignments, setAssignments] = useState([{ id: aId, title: "Some Title" }])
 
   return (
     <>

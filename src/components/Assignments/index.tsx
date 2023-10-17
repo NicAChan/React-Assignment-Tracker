@@ -1,18 +1,14 @@
+import { useState } from "react";
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
 type Props = {
-  assignments: { id: number, title: string, isCompleted: boolean }[];
-  setAssignments: (assignments: { id: number, title: string, isCompleted: boolean }[]) => void;
+  assignments: { id: number, title: string }[];
+  setAssignments: (assignments: { id: number, title: string }[]) => void;
 }
 
 export function Assignments({assignments, setAssignments}: Props) {
-  let completed = 0
-  assignments.forEach(assignment => {
-    if (assignment.isCompleted) {
-      completed++
-    }
-  })
+  const [numOfCompleted, setNumOfCompleted] = useState(0)
 
   return (
     <section className={styles.assignments}>
@@ -24,7 +20,7 @@ export function Assignments({assignments, setAssignments}: Props) {
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>{completed} of {assignments.length}</span>
+          <span>{numOfCompleted} of {assignments.length}</span>
         </div>
       </header>
 
@@ -34,9 +30,10 @@ export function Assignments({assignments, setAssignments}: Props) {
               key={assignment.id}
               id={assignment.id}
               title={assignment.title} 
-              isCompleted={assignment.isCompleted}
               assignments={assignments}
               setAssignments={setAssignments}
+              numOfCompleted={numOfCompleted}
+              setNumOfCompleted={setNumOfCompleted}
             />
         ))}
       </div>
