@@ -38,7 +38,6 @@ export function Assignment({id, title, assignments, setAssignments, numOfComplet
       <button className={styles.checkContainer} onClick={toggleCompleted}>
         {checkContainer}
       </button>
-      <p>{id}</p>
       <p className={titleClass}>{title}</p>
       <button className={styles.deleteButton} onClick={deleteAssignment}>
         <TbTrash size={20} />
