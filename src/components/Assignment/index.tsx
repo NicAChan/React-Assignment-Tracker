@@ -32,7 +32,6 @@ export function Assignment({id, title, assignments, setAssignments, numOfComplet
     setAssignments(assignments.filter(assignment => assignment.id !== id))
   }
 
-
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer} onClick={toggleCompleted}>
